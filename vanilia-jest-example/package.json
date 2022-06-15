@@ -1,0 +1,15 @@
+{
+  "name": "react-tdd",
+  "version": "1.0.0",
+  "description": "study for tdd",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^28.1.1",
+    "jest": "^28.1.1"
+  }
+}
