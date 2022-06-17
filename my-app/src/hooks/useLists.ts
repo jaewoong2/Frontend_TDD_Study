@@ -12,7 +12,9 @@ const useLists = (initValue: string[]): ListsType => {
 
   const addList = (list: string) => {
     return () => {
-      setState((prev) => [...prev, list]);
+      if (list.trim() !== '') {
+        setState((prev) => [...prev, list]);
+      }
     };
   };
 

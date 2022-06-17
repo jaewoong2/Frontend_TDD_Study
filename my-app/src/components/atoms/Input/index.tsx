@@ -1,10 +1,11 @@
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 export const InputContainer = styled.label`
   display: flex;
 `;
 
-export const Input = styled.input`
+const StyledInput = styled.input`
   font-size: 16px;
   margin-right: 9px;
   padding: 10px 10px;
@@ -13,3 +14,23 @@ export const Input = styled.input`
   outline: none;
   flex: 1;
 `;
+
+type Props = React.InputHTMLAttributes<HTMLInputElement>;
+
+export const Input = forwardRef<HTMLInputElement, Props>(
+  ({ value, onChange, placeholder }, ref) => {
+    return (
+      <StyledInput
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        ref={ref}
+      />
+    );
+  },
+);
+
+Input.displayName = 'Input';
+Input.defaultProps = {
+  onChange: () => {},
+};

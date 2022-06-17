@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { Label } from '../Label';
 
 type Props = {
-  backgroundColor: string;
-  hoverColor: string;
+  backgroundColor?: string;
+  hoverColor?: string;
 } & React.DetailsHTMLAttributes<HTMLButtonElement>;
 
 export const Button = React.forwardRef<HTMLButtonElement, Props>(
@@ -22,6 +22,10 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>(
 );
 
 Button.displayName = 'Button';
+Button.defaultProps = {
+  backgroundColor: '#304FFE',
+  hoverColor: '#1E40FF',
+};
 
 const Btn = styled.button<Props>`
   outline: none;
@@ -32,7 +36,7 @@ const Btn = styled.button<Props>`
   border-radius: 8px;
   cursor: pointer;
   &:hover {
-    background-color: ${({ backgroundColor }) => backgroundColor};
+    background-color: ${({ hoverColor }) => hoverColor};
   }
   &:active {
     box-shadow: inset 5px 5px 10px #00000033;

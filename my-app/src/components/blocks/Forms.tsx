@@ -3,22 +3,33 @@ import { Button, Input, InputContainer } from 'components/atoms';
 
 type Props = {
   handleAddTodo: () => void;
+  removeTodo: () => void;
   todo: string;
   onChangeTodo: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeHolder?: string;
 };
 
-export function Forms({ handleAddTodo, todo, onChangeTodo }: Props) {
+export function Forms({
+  handleAddTodo,
+  todo,
+  onChangeTodo,
+  removeTodo,
+  placeHolder,
+}: Props) {
   return (
-    <InputContainer>
+    <InputContainer data-testid="inputForm">
       <Input
         value={todo}
         onChange={onChangeTodo}
-        placeholder="할 일을 입력 해주세요"
+        placeholder={placeHolder ?? ''}
       />
       <Button
         backgroundColor="#304ffe"
         hoverColor="#1e40ff"
-        onClick={handleAddTodo}>
+        onClick={() => {
+          handleAddTodo();
+          removeTodo();
+        }}>
         + ADD
       </Button>
     </InputContainer>

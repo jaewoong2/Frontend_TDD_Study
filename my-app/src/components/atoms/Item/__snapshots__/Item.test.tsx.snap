@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> renders component correctly 1`] = `
+.c1 {
+  color: #fff;
+  font-size: 16px;
+}
+
+.c2 {
+  outline: none;
+  border: none;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.c2:active {
+  box-shadow: inset 5px 5px 10px #00000033;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-bottom: 1px solid #bdbdbd;
+  margin: 10px;
+  padding: 10px;
+}
+
+.c0 label {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  color: black;
+}
+
+<div>
+  <li
+    class="c0"
+  >
+    <label
+      class="c1"
+    >
+      Default Value
+    </label>
+    <button
+      class="c2"
+    >
+      <label
+        class="c1"
+      >
+        Delete
+      </label>
+    </button>
+  </li>
+</div>
+`;
