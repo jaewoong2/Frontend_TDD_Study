@@ -1,15 +1,26 @@
-import React from 'react';
+import useChange from 'hooks/useChange';
+import useLists from 'hooks/useLists';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import { Button, Input, InputContainer } from './atoms';
+import { Forms } from './blocks/Forms';
+import Lists from './blocks/Lists';
 
 function App() {
+  const [todo, onChangeTodo] = useChange('');
+  const { lists, addList, removeList } = useLists([]);
+
+  useEffect(() => {
+    console.log(lists);
+  }, [lists]);
   return (
     <Container>
       <Contents>
-        <InputContainer>
-          <Input placeholder="할 일을 입력 해주세요" />
-          <Button>+ ADD</Button>
-        </InputContainer>
+        <Lists lists={lists} handleDelete={removeList} />
+        <Forms
+          handleAddTodo={addList(todo)}
+          onChangeTodo={onChangeTodo}
+          todo={todo}
+        />
       </Contents>
     </Container>
   );

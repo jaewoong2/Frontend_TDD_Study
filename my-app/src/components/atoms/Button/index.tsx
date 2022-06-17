@@ -2,12 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { Label } from '../Label';
 
-type Props = React.DetailsHTMLAttributes<HTMLButtonElement>;
+type Props = {
+  backgroundColor: string;
+  hoverColor: string;
+} & React.DetailsHTMLAttributes<HTMLButtonElement>;
 
 export const Button = React.forwardRef<HTMLButtonElement, Props>(
-  ({ children }, ref) => {
+  ({ backgroundColor, hoverColor, children, onClick }, ref) => {
     return (
-      <Btn ref={ref}>
+      <Btn
+        backgroundColor={backgroundColor}
+        onClick={onClick}
+        hoverColor={hoverColor}
+        ref={ref}>
         <Label>{children}</Label>
       </Btn>
     );
@@ -16,16 +23,16 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>(
 
 Button.displayName = 'Button';
 
-const Btn = styled.button`
+const Btn = styled.button<Props>`
   outline: none;
   border: none;
   text-align: center;
-  background-color: #304ffe;
+  background-color: ${({ backgroundColor }) => backgroundColor};
   padding: 10px 20px;
   border-radius: 8px;
   cursor: pointer;
   &:hover {
-    background-color: #1e40ff;
+    background-color: ${({ backgroundColor }) => backgroundColor};
   }
   &:active {
     box-shadow: inset 5px 5px 10px #00000033;

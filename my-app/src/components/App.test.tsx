@@ -1,7 +1,5 @@
-/* eslint-disable testing-library/no-node-access */
-/* eslint-disable testing-library/no-container */
-import { render, screen } from "@testing-library/react";
-import App from "./App";
+import { render, screen } from '@testing-library/react';
+import App from './App';
 
 /**
  * render: 리액트 컴포넌트를 화면에 표시하기 위함
@@ -12,7 +10,7 @@ import App from "./App";
  *
  * getByText(text): 화면에서 text를 가지고 있는 돔 요소를 반환
  */
-test("renders learn react link", () => {
+test('renders learn react link', () => {
   render(<App />);
   const linkElement = screen.getByText(/learn react/i);
 
@@ -20,26 +18,26 @@ test("renders learn react link", () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-describe("<App />", () => {
-  it("renders component correctly", () => {
+describe('<App />', () => {
+  it('renders component correctly', () => {
     const { container } = render(<App />);
     const linkElement = screen.getByText(/learn react/i);
 
     // linkElement 가 돔에 실제로 표시 되었는지 확인한다
     expect(linkElement).toBeInTheDocument();
 
-    expect(screen.getAllByAltText("logo")).toHaveLength(1);
-    expect(screen.getAllByAltText("logo")[0]).toHaveAttribute(
-      "src",
-      "logo.svg"
+    expect(screen.getAllByAltText('logo')).toHaveLength(1);
+    expect(screen.getAllByAltText('logo')[0]).toHaveAttribute(
+      'src',
+      'logo.svg',
     );
 
     // expect(screen.getAllByRole("link")).toHaveLength(1);
     // expect(screen.getAllByRole("link")[0]).toHaveAttribute("src", "logo.svg");
 
-    expect(container.getElementsByTagName("p")).toHaveLength(1);
-    expect(container.getElementsByTagName("p")[0]).toHaveTextContent(
-      "Edit src/App.js and save to reload"
+    expect(container.getElementsByTagName('p')).toHaveLength(1);
+    expect(container.getElementsByTagName('p')[0]).toHaveTextContent(
+      'Edit src/App.js and save to reload',
     );
 
     expect(container).toMatchSnapshot();
