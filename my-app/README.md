@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# Jest & React-testing-library
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Function
 
-## Available Scripts
+### describe
 
-In the project directory, you can run:
+설명: 개별 테스트를 묶는 함수
 
-### `npm start`
+#### Usage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```ts
+describe('테스트 설명', () => {
+  it('', () => {});
+  it('', () => {});
+});
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### it
 
-### `npm test`
+설명: 개별 테스트 함수
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Usage
 
-### `npm run build`
+```ts
+it('테스트 설명', () => {});
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### expect
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+설명: `DOM`을 연결해 테스트 `Matcher`를 사용 할 수 있게 해줌
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Usage
 
-### `npm run eject`
+```tsx
+const input = screen.getByPlaceholderText('Write Todo..');
+expect(input).toBeInTheDocument();
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### render
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+설명: 리엑트 컴포넌트를 메모리상의 `document.body` 에 추가함
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Usage
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```tsx
+import { render } from '@testing-library/react';
 
-## Learn More
+function render(
+  ui: React.ReactElement<any>,
+  options?: {
+    /* You won't often use this, expand below for docs on options */
+  },
+): RenderResult;
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+test('renders a message', () => {
+  const { container, getByText } = render(<Greeting />);
+  expect(getByText('Hello, world!')).toBeInTheDocument();
+  expect(container.firstChild).toMatchInlineSnapshot(`
+    <h1>Hello, World!</h1>
+  `);
+});
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### screen
 
-### Code Splitting
+설명: `document.body` 를 기준으로 쿼리를 사용 할 수 있음
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### Usage
 
-### Analyzing the Bundle Size
+1. `screen` 을 사용하기전에 `render` 가 실행 되어야 함
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```tsx
+render(<Component />);
+const input = screen.getByLabelText('UserName');
+```
 
-### Making a Progressive Web App
+### fireEvent
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+설명: 액션(이벤트)에 대한 테스트를 해야하는 경우 사용
 
-### Advanced Configuration
+#### Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```ts
+fireEvent[eventName](element: Element | Node | Window | Document, option?: {})
 
-### Deployment
+fireEvent.click(button);
+fireEvent.change(input, { target: { value: 'changed value' } });
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Query
 
-### `npm run build` fails to minify
+### Single Elements (Docs)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `getBy...` : Returns the matching node for a query, and throw a descriptive error if no elements match or if more than one match is found
+
+- `queryBy...` : Returns the matching node for a query, and return null if no elements match. This is useful for asserting an element that is not present. Throws an error if more than one match is found
+
+- `findBy...` : Returns a Promise which resolves when an element is found which matches the given query. The promise is rejected if no element is found or if more than one element is found after a default timeout of 1000ms
