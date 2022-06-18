@@ -1,54 +1,69 @@
-import useChange from 'hooks/useChange';
-import React, { createContext, useMemo, useState } from 'react';
+import React, { createContext, useEffect, useMemo, useState } from 'react';
 
 const initalAction = {
-  updateTodo: (_: string) => {},
-  onChangeTodo: (_: React.ChangeEvent<HTMLInputElement>) => {},
-  addList: () => {},
-  removeList: (_: number) => {},
+  addList: () => (todo: string) => {},
+  removeList: (index: number) => {},
 };
 
 export const TodoActionsContext = createContext(initalAction);
-export const TodoValueContext = createContext<{
-  todoLists: string[];
-  todo: string;
-}>({
-  todo: '',
-  todoLists: [],
-});
+export const TodoValueContext = createContext<string[]>([]);
 
 type Props = {
   children?: React.ReactNode;
 };
 
 export function TodoProvider({ children }: Props) {
-  const [todo, updateTodo, onChangeTodo] = useChange('');
-  const [todoLists, setTodoLists] = useState<string[]>([]);
+  const { addStroage, getStorage, removeStroage } = utils;
+  const [todoLists, setTodoLists] = useState<string[]>(getStorage());
 
   const actions = useMemo(
     () => ({
-      updateTodo,
-      onChangeTodo,
-      addList: () => setTodoLists((prev) => [...prev, todo]),
+      addList: () => (todo: string) => {
+        if (todo.trim() !== '') {
+          setTodoLists((prev) => [...prev, todo]);
+          addStroage(todo);
+        }
+      },
       removeList: (index: number) =>
-        setTodoLists((prev) => [...prev].filter((_, i) => i !== index)),
+        setTodoLists((prev) => {
+          removeStroage(index);
+          return [...prev].filter((_, i) => i !== index);
+        }),
     }),
-    [todo, onChangeTodo, updateTodo],
-  );
-
-  const values = useMemo(
-    () => ({
-      todo,
-      todoLists,
-    }),
-    [todo, todoLists],
+    [],
   );
 
   return (
     <TodoActionsContext.Provider value={actions}>
-      <TodoValueContext.Provider value={values}>
+      <TodoValueContext.Provider value={todoLists}>
         {children}
       </TodoValueContext.Provider>
     </TodoActionsContext.Provider>
   );
 }
+
+const utils = {
+  getStorage: () => {
+    const data = localStorage.getItem('todoItem');
+    if (data !== null) {
+      const todolists = JSON.parse(data);
+      if (todolists) {
+        return todolists;
+      }
+      return [];
+    }
+    return [];
+  },
+
+  addStroage: (item: string) => {
+    const data = utils.getStorage();
+    const lists = [...data, item];
+    localStorage.setItem('todoItem', JSON.stringify(lists));
+  },
+
+  removeStroage: (index: number) => {
+    const data = utils.getStorage();
+    const lists = [...data].filter((_, i) => i !== index);
+    localStorage.setItem('todoItem', JSON.stringify(lists));
+  },
+};

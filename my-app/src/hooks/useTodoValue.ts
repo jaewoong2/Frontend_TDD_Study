@@ -4,7 +4,7 @@ import { TodoValueContext } from 'context/TodoProvider';
 export default () => {
   const values = useContext(TodoValueContext);
   if (values === undefined) {
-    throw new Error('useCounterValue should be used within CounterProvider');
+    throw new Error('todoValueContext should be used within TodoProvider');
   }
   return values;
 };

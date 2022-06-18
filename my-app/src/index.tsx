@@ -10,8 +10,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <TodoProvider>
-      <App />
-    </TodoProvider>
+    <App />
   </React.StrictMode>,
 );

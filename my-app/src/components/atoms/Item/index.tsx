@@ -34,9 +34,7 @@ function Item({
 export { Item };
 
 Item.defaultProps = {
-  onClick: () => {
-    console.log('onClick Button');
-  },
+  onClick: () => {},
   hoverColor: '',
   buttonName: '',
   backgroundColor: '',

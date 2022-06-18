@@ -1,21 +1,20 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button, Input, InputContainer } from 'components/atoms';
+import useChange from 'hooks/useChange';
 
 type Props = {
-  handleAddTodo: () => void;
-  removeTodo: () => void;
-  todo: string;
-  onChangeTodo: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  addTodo: (todo: string) => void;
   placeHolder?: string;
 };
 
-export function Forms({
-  handleAddTodo,
-  todo,
-  onChangeTodo,
-  removeTodo,
-  placeHolder,
-}: Props) {
+export function Forms({ addTodo, placeHolder }: Props) {
+  const [todo, updateTodo, onChangeTodo] = useChange('');
+
+  const handleTodo = useCallback(() => {
+    addTodo(todo);
+    updateTodo('');
+  }, [todo, addTodo, updateTodo]);
+
   return (
     <InputContainer data-testid="inputForm">
       <Input
@@ -26,10 +25,7 @@ export function Forms({
       <Button
         backgroundColor="#304ffe"
         hoverColor="#1e40ff"
-        onClick={() => {
-          handleAddTodo();
-          removeTodo();
-        }}>
+        onClick={handleTodo}>
         + ADD
       </Button>
     </InputContainer>

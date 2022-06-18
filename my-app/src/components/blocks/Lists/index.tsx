@@ -1,5 +1,4 @@
-import { Button, Item } from 'components/atoms';
-import { Label } from 'components/atoms/Label';
+import { Item } from 'components/atoms';
 import React from 'react';
 import styled from 'styled-components';
 

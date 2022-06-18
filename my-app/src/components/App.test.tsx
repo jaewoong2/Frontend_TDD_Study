@@ -1,7 +1,15 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Button, Input } from 'components/atoms';
+import { TodoProvider } from 'context/TodoProvider';
 import 'jest-styled-components';
 import App from './App';
+
+function ProvidedApp() {
+  return (
+    <TodoProvider>
+      <App />
+    </TodoProvider>
+  );
+}
 
 describe('<App />', () => {
   it('renders component correctly', () => {
@@ -20,8 +28,10 @@ describe('<App />', () => {
   });
 
   it('adds and deletes Todo Items', () => {
-    render(<App />);
-    const input = screen.getByPlaceholderText('할 일을 입력해 주세요');
+    render(<ProvidedApp />);
+    const input = screen.getByPlaceholderText(
+      '할 일을 입력해 주세요',
+    ) as HTMLInputElement;
     const button = screen.getByText('+ ADD').parentElement as HTMLButtonElement;
     fireEvent.change(input, { target: { value: 'study react 1' } });
     fireEvent.click(button);
@@ -46,7 +56,7 @@ describe('<App />', () => {
   });
 
   it('doesn`t add empty todo', () => {
-    render(<App />);
+    render(<ProvidedApp />);
     const todoLists = screen.getByTestId('toDoList');
     const length = todoLists.childElementCount;
 
