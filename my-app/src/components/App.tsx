@@ -1,20 +1,23 @@
 import useChange from 'hooks/useChange';
 import useLists from 'hooks/useLists';
+import useTodoActions from 'hooks/useTodoActions';
+import useTodoValue from 'hooks/useTodoValue';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { Forms } from './blocks/Forms';
 import Lists from './blocks/Lists';
 
 function App() {
-  const [todo, updateState, onChangeTodo] = useChange('');
-  const { lists, addList, removeList } = useLists([]);
+  const { onChangeTodo, addList, updateTodo, removeList } = useTodoActions();
+  const { todo, todoLists } = useTodoValue();
 
   return (
     <Container>
       <Contents>
-        <Lists lists={lists} handleDelete={removeList} />
+        <Lists lists={todoLists} handleDelete={removeList} />
         <Forms
-          removeTodo={() => updateState('')}
-          handleAddTodo={addList(todo)}
+          removeTodo={() => updateTodo('')}
+          handleAddTodo={addList}
           onChangeTodo={onChangeTodo}
           todo={todo}
           placeHolder="할 일을 입력해 주세요"
