@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useMemo, useState } from 'react';
 
 const initalAction = {
   addList: () => (todo: string) => {},
@@ -19,10 +19,13 @@ export function TodoProvider({ children }: Props) {
   const actions = useMemo(
     () => ({
       addList: () => (todo: string) => {
-        if (todo.trim() !== '') {
-          setTodoLists((prev) => [...prev, todo]);
-          addStroage(todo);
-        }
+        setTodoLists((prev) => {
+          if (todo.trim() !== '') {
+            addStroage(todo);
+            return [...prev, todo];
+          }
+          return prev;
+        });
       },
       removeList: (index: number) =>
         setTodoLists((prev) => {

@@ -1,6 +1,7 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { Button, Input, InputContainer } from 'components/atoms';
 import useChange from 'hooks/useChange';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   addTodo: (todo: string) => void;
@@ -9,10 +10,12 @@ type Props = {
 
 export function Forms({ addTodo, placeHolder }: Props) {
   const [todo, updateTodo, onChangeTodo] = useChange('');
+  const navigate = useNavigate();
 
   const handleTodo = useCallback(() => {
     addTodo(todo);
     updateTodo('');
+    navigate('/');
   }, [todo, addTodo, updateTodo]);
 
   return (

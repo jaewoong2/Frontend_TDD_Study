@@ -1,22 +1,28 @@
 import { Item } from 'components/atoms';
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 type Props = {
   lists: string[];
-  handleDelete: (index: number) => void;
 };
 
-function Lists({ lists, handleDelete }: Props) {
+function Lists({ lists }: Props) {
+  const navigate = useNavigate();
+
+  const handleClickItem = useCallback((index: number) => {
+    navigate(`/detail/${index}`);
+  }, []);
+
   return (
     <Container data-testid="toDoList">
       {lists.map((list, i) => (
         <Item
           key={`${list + i}`}
-          backgroundColor="#FF1744"
-          hoverColor="#F01440"
-          onClick={() => handleDelete(i)}
-          buttonName="Delete">
+          backgroundColor="#d9d9d9"
+          hoverColor="#d9d9d9"
+          onClick={() => handleClickItem(i)}
+          buttonName="Move to Item">
           {list}
         </Item>
       ))}

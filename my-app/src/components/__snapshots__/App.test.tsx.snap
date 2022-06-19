@@ -1,49 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<App /> renders component correctly 1`] = `
-.c6 {
-  color: #fff;
-  font-size: 16px;
-}
-
-.c5 {
-  outline: none;
-  border: none;
-  text-align: center;
-  background-color: #304ffe;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.c5:hover {
-  background-color: #1e40ff;
-}
-
-.c5:active {
-  box-shadow: inset 5px 5px 10px #00000033;
-}
-
-.c3 {
+.c2 {
+  width: 100%;
+  height: 40px;
+  background-color: #9bceee;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  border-radius: 8px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 .box {
+  width: 100%;
+}
+
+.c2 .center {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c4 {
-  font-size: 16px;
-  margin-right: 9px;
-  padding: 10px 10px;
-  border-radius: 8px;
-  border: 1px solid #bdbdbd;
-  outline: none;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-
-.c2 {
   min-width: 350px;
   height: 400px;
   overflow-y: scroll;
@@ -51,7 +47,57 @@ exports[`<App /> renders component correctly 1`] = `
   margin-bottom: 20px;
 }
 
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c5 {
+  font-size: 20px;
+  color: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  bottom: -30px;
+  border-radius: 30%;
+  cursor: pointer;
+  background-color: #304ffe;
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c5:hover {
+  background-color: #1e40ff;
+}
+
+.c5:active {
+  box-shadow: inset 5px 5px 10px rgba(0,0,0,0.2);
+}
+
 .c0 {
+  width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -71,6 +117,7 @@ exports[`<App /> renders component correctly 1`] = `
 }
 
 .c1 {
+  max-width: 1024px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -82,6 +129,28 @@ exports[`<App /> renders component correctly 1`] = `
   padding: 20px;
   border-radius: 8px;
   box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+  position: relative;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+}
+
+.c1 .error {
+  width: 400px;
+  height: 450px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 1.3em;
 }
 
 <div>
@@ -91,29 +160,41 @@ exports[`<App /> renders component correctly 1`] = `
     <div
       class="c1"
     >
-      <ul
+      <nav
         class="c2"
-        data-testid="toDoList"
-      />
-      <label
-        class="c3"
-        data-testid="inputForm"
       >
-        <input
-          class="c4"
-          placeholder="할 일을 입력해 주세요"
-          value=""
-        />
-        <button
-          class="c5"
+        <div
+          class="box left"
         >
-          <label
-            class="c6"
+          <a
+            href="/"
           >
-            + ADD
-          </label>
-        </button>
-      </label>
+            Back
+          </a>
+        </div>
+        <div
+          class="box center"
+        >
+          할 일 목록
+        </div>
+        <div
+          class="box right"
+        />
+      </nav>
+      <div
+        class="c3"
+      >
+        <ul
+          class="c4"
+          data-testid="toDoList"
+        />
+        <a
+          class="c5"
+          href="/add"
+        >
+          +
+        </a>
+      </div>
     </div>
   </div>
 </div>

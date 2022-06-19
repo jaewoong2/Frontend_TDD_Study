@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Lists /> render List correctly 1`] = `
+<div>
+  <ul
+    class="sc-gKXOVf eJVsLV"
+    data-testid="toDoList"
+  >
+    <li
+      class="sc-eCYdqJ ciJnwK"
+    >
+      <label
+        class="sc-bczRLJ LpNGc"
+      >
+        default value
+      </label>
+      <button
+        class="sc-gsnTZi bWpsoW"
+      >
+        <label
+          class="sc-bczRLJ LpNGc"
+        >
+          Move to Item
+        </label>
+      </button>
+    </li>
+  </ul>
+</div>
+`;
